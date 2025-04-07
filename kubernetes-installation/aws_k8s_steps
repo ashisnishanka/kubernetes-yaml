@@ -1,3 +1,18 @@
+create two machine => master(ubuntu)
+                   => node(ubuntu)
+------------------------
+master =>t2.micro to t2.medium
+       =>EBS: 15GB
+slave:
+   =>t2.micro to t2.medium
+   =>EBS: 12GB
+=================================
+to change the hostname
+========================
+hostnamectl set-hostname master
+hostnamectl set-hostname node1
+hostnamectl set-hostname node2
+=============================================
 run myscripts_aws.sh both master and all slaves
  sh myscripts_aws.sh
 or
