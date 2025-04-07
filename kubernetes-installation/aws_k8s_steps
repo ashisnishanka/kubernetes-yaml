@@ -1,10 +1,11 @@
+For kubernetes cluster need to create machine
 create two machine => master(ubuntu)
                    => node(ubuntu)
 ------------------------
-master =>t2.micro to t2.medium
+master => we need to take t2.medium
        =>EBS: 15GB
 slave:
-   =>t2.micro to t2.medium
+   =>for slave need to take t2.medium
    =>EBS: 12GB
 =================================
 to change the hostname
