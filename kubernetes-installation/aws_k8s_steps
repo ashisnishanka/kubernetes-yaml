@@ -9,9 +9,9 @@ slave:
 =================================
 to change the hostname
 ========================
-hostnamectl set-hostname master
-hostnamectl set-hostname node1
-hostnamectl set-hostname node2
+sudo hostnamectl set-hostname master
+sudo hostnamectl set-hostname node1
+sudo hostnamectl set-hostname node2
 =============================================
 run myscripts_aws.sh both master and all slaves
  sh myscripts_aws.sh
