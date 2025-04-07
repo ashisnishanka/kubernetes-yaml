@@ -1,0 +1,26 @@
+run myscripts_aws.sh both master and all slaves
+ sh myscripts_aws.sh
+or
+  sudo chmod u+x myscripts_aws.sh
+--------------------
+ ./myscripts_aws.sh
+---------------------------
+Master
+----------------
+Initialize the Kubernetes master node.
+
+ sudo kubeadm config images pull
+
+ sudo kubeadm init
+
+ mkdir -p "$HOME"/.kube
+ sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
+ sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
+
+ # Network Plugin = calico
+ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
+
+SLAVE
+==============
+kubeadm join 172.31.46.53:6443 --token jmdzlc.wdzh33maefhgxmct \
+        --discovery-token-ca-cert-hash sha256:04f280007f085ff89986832607f8a83dc4b88b92505964926ac3412a1b8f2ad5
