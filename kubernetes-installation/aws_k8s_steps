@@ -40,3 +40,7 @@ SLAVE
 ==============
 sudo kubeadm join 172.31.46.53:6443 --token jmdzlc.wdzh33maefhgxmct \
         --discovery-token-ca-cert-hash sha256:04f280007f085ff89986832607f8a83dc4b88b92505964926ac3412a1b8f2ad5
+
+if user need to print again token
+=================================
+kubeadm token create --print-join-command
