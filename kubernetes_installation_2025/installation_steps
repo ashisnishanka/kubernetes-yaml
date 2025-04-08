@@ -1,2 +1,32 @@
 Run the scripts both master and all nodes 
-sudo chmod u+x 
+===================================================
+sudo chmod u+x myawsscript.sh
+./myawsscript.sh
+or
+sh myawmyawsscript.sh
+==================================================================
+RUN BELOW SCRIPTS IN MASTER ONLY
+=======================================
+step 1: sudo kubeadm init
+
+step2: mkdir -p "$HOME"/.kube
+       sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
+       sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
+
+step3: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
+
+==================================================================
+RUN BELOW SCRIPTS IN ALL THE NODES 
+=======================================
+kubeadm join 172.31.9.243:6443 --token c6ucv9.1ce00qo1jeqrt1ba \
+        --discovery-token-ca-cert-hash sha256:aa6eeb504578fc43d4db77c2990f75b87facab124605ecadfcf11f05b1f34788
+
+Note: The above join command when we are doing kubeadm init that time it will give you based on that same join command we need to add in all nodes 
+==============
+if someone forget the join token he can use below command 
+if user need to print again token
+=================================
+kubeadm token create --print-join-command
+-----------------------------------
+if user need to see in nodes all docker info he need to excute below command 
+                  =>sudo crictl ps
