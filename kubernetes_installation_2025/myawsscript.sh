@@ -26,7 +26,7 @@ sudo apt-get install -y containerd.io
 
 containerd config default | sed -e 's/SystemdCgroup = false/SystemdCgroup = true/' -e 's/sandbox_image = "registry.k8s.io\/pause:3.6"/sandbox_image = "registry.k8s.io\/pause:3.9"/' | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
-sudo systemctl status containerd
+#sudo systemctl status containerd
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
