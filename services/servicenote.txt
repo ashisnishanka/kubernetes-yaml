@@ -1,0 +1,101 @@
+Label
+============
+kubectl describe pod mytestpod |less
+=>kubectl label pod mytestpod env=dev
+kubectl describe pod mytestpod | less
+=>if user need to change this 
+       kubectl label --overwrite pod mytestpod env=prod
+=>delete the label
+     =>kubectl label pods mytestpod env- 
+=>for all pod need to add lable 
+     =>kubectl label pods --all status=run
+=>show label
+    =>kubectl get pods --show-labels
+	
+============
+pod
+=======
+kubectl run mytestpod --generator=run-pod/v1 --image=httpd
+--
+kubectl run mytestpod --dry-run --generator=run-pod/v1 --image=httpd
+-----------
+need to write pod from starting
+====================================
+=>kubectl explain pod => it will show all info about pod which all we need to create a pod 
+ -----
+ vi mypod.yaml
+ --------------------
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+  labels:
+    env: dev
+spec:        # specifications
+  containers:
+    - name: test
+	  image: httpd
+	  
+==========
+Specifications refer to detailed descriptions of the characteristics and features of a product or system. To check the specifications of your PC, you can look for information such as the processor type, RAM, graphics card model, and storage type (SSD or HDD)
+==================
+kubectl explain pod --recursive
+kubectl explain pod --recursive | less => it will show all fields in pod 
+
+how to create yaml file from dray-run 
+================================
+kubectl run mytestpod --dry-run --generator=run-pod/v1 --image=httpd -o yaml
+kubectl run mytestpod --dry-run --generator=run-pod/v1 --image=httpd -o yaml > mypod.yaml
+
+
+service
+================
+clusterIP
+=================
+kubectl run testpod --image httpd
+
+create service
+------------
+kubectl expose pod testpod --port=8080 --target-port=80 --name service1
+
+--port=8080 =>cluster
+--target-port => pod 
+
+note :
+-----------
+take the cluster ip and go to any node and user clusterip:8080
+
+if any trafic coming to 8080 in cluster it will rediract to 80 and show the result
+
+curl clusterip:8080
+----
+other method
+==============
+kubectl run clusteriptest --image nginx:alpine
+kubectl exec -it clusteriptest -- sh
+curl http://service1.default.svc.cluster.local:8080
+====================
+explain
+============
+kubectl run clusteriptest --image nginx:alpine => temp pod
+kubectl exec -it clusteriptest -- sh => go inside the pod 
+    use below command
+
+   => curl http://service1.default.svc.cluster.local:8080
+               servicename = service1
+               default = namespace
+               svc => service
+               cluster= clustername
+
+===============
+nodeport
+==================
+kubectl run testpod1 --image httpd
+kubectl expose pod testpod1 --type=NodePort --port=8080 --target-port=80 --name service2
+
+34.136.27.52:31814
+
+http://104.154.240.102:32349
+-------------
+kubectl run testpod2 --image httpd
+kubectl expose pod testpod2 --type=LoadBalancer --port=8080 --target-port=80 --name loadbalncerservice
