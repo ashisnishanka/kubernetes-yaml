@@ -1,0 +1,32 @@
+DaemonSet
+====================
+pod automaticaly will create whenever the node is added automatically 
+
+DaemonSet
+A DaemonSet ensures that all (or some) Nodes run a copy of a Pod. As nodes are added to the cluster, Pods are added to them. As nodes are removed from the cluster, those Pods are garbage collected. Deleting a DaemonSet will clean up the Pods it created.
+
+Some typical uses of a DaemonSet are:
+
+running a cluster storage daemon on every node
+running a logs collection daemon on every node
+running a node monitoring daemon on every node
+
+
+Fluentd is an open source data collector, which lets you unify the data collection and consumption for a better use and understanding of data
+
+here it not is menation how many replica required but other controler it will there 
+it will define based of number of node in env 
+
+kubectl get ds -w -n kube-system
+kubectl get pod -w -n kube-system
+kubectl delete ds fluentd-elasticsearch  -n kube-system
+kubectl describe pods - fluentd-elasticsearch-8smtx  -n kube-system
+added new node
+===============
+
+kubeadm token create --print-join-command
+
+daemon set will create one pod per node 
+
+this will run your master node as well
+
