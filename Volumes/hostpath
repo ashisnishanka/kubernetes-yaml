@@ -5,13 +5,12 @@ metadata:
 spec:
   containers:
     - name: testhostpath
-      image: centos
+      image: ubuntu
       command: ["/bin/bash", "-c", "sleep 10000"]
       volumeMounts:
-	    - name: myvoltest
+        - name: mytestvol
           mountPath: /tmp/data
-      
   volumes:
-    - name: myvoltest
+    - name: mytestvol
       hostPath:
         path: /tmp/data
