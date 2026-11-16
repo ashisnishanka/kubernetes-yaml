@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: mytesthostpath
 spec:
-  nodeName: gke-mycluster-default-pool-bd02e0b3-2alk # 
+  nodeName: gke-mycluster-default-pool-bd02e0b3-2alk # assgin to a different node for testing
   containers:
     - name: testhostpath
       image: ubuntu
